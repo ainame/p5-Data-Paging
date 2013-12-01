@@ -9,11 +9,7 @@ use Class::Accessor::Lite (
         per_page
         current_page
         base_url
-        direction
         window
-        outer_window
-        left_window
-        right_window
     /]
 );
 
@@ -98,14 +94,36 @@ sub prev_page {
 
 sub has_next {
     my $self = shift;
-    $self->total_count ?
-        $self->current_page < $self->last_page
+    $self->total_count ? $self->current_page < $self->last_page
         : scalar(@{$self->entries}) > $self->per_page;
 }
 
 sub next_page {
     my $self = shift;
     $self->current_page + 1;
+}
+
+sub navigation {
+    my $self = shift;
+    croak "can't calc navigation without window" unless defined $self->window;
+
+    # inspired from Data::Page::Navigation
+    my @navigation = ($self->current_page);
+    my $prev = $self->prev_page;
+    my $next = $self->next_page;
+    my $i = 0;
+    while (@navigation < $self->window) {
+        if ($i % 2) {
+            unshift @navigation, $prev if $self->first_page <= $prev;
+            $prev -= 1;
+        }
+        else {
+            push @navigation, $next if $self->last_page >= $next;
+            $next += 1;
+        }
+        $i += 1;
+    }
+    \@navigation;
 }
 
 1;

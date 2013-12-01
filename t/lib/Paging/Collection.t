@@ -92,6 +92,84 @@ subtest 'instantiate with total_count params' => sub {
         };
     };
 
+    subtest 'when with window params' => sub {
+        subtest 'current_page =1 and window = 5' => sub {
+            $collection = Paging::Collection->new(
+                entries      => [qw/a b c d e/],
+                total_count  => 50,
+                per_page     => 5,
+                current_page => 1,
+                window       => 5,
+            );
+            is_deeply $collection->navigation, [1,2,3,4,5];
+        };
+
+        subtest 'current_page = 3 and window = 5' => sub {
+            $collection = Paging::Collection->new(
+                entries      => [qw/a b c d e/],
+                total_count  => 50,
+                per_page     => 5,
+                current_page => 3,
+                window       => 5,
+            );
+            is_deeply $collection->navigation, [1,2,3,4,5];
+        };
+
+        subtest 'current_page = 4 and window = 5' => sub {
+            $collection = Paging::Collection->new(
+                entries      => [qw/a b c d e/],
+                total_count  => 50,
+                per_page     => 5,
+                current_page => 4,
+                window       => 5,
+            );
+            is_deeply $collection->navigation, [2,3,4,5,6];
+        };
+
+        subtest 'current_page = 5 and window = 5' => sub {
+            $collection = Paging::Collection->new(
+                entries      => [qw/a b c d e/],
+                total_count  => 50,
+                per_page     => 5,
+                current_page => 5,
+                window       => 5,
+            );
+            is_deeply $collection->navigation, [3,4,5,6,7];
+        };
+
+        subtest 'current_page = 9 and window = 5' => sub {
+            $collection = Paging::Collection->new(
+                entries      => [qw/a b c d e/],
+                total_count  => 50,
+                per_page     => 5,
+                current_page => 10,
+                window       => 5,
+            );
+            is_deeply $collection->navigation, [6,7,8,9,10];
+        };
+
+        subtest 'current_page = 10 and window = 5' => sub {
+            $collection = Paging::Collection->new(
+                entries      => [qw/a b c d e/],
+                total_count  => 50,
+                per_page     => 5,
+                current_page => 10,
+                window       => 5,
+            );
+            is_deeply $collection->navigation, [6,7,8,9,10];
+        };
+    };
+    subtest 'when without window params' => sub {
+        subtest 'navigation' => sub {
+            $collection = Paging::Collection->new(
+                entries      => [qw/a b c d e/],
+                total_count  => 50,
+                per_page     => 5,
+                current_page => 10,
+            );
+            ok exception { $collection->navigation; };
+        };
+    };
 };
 
 subtest 'instantiate without total_count params' => sub {
