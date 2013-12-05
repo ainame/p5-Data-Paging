@@ -110,11 +110,12 @@ sub next_page {
     $self->current_page + 1;
 }
 
+# inspired from Data::Page::Navigation
 sub navigation {
     my $self = shift;
     croak "can't calc navigation without window" unless defined $self->window;
+    return [$self->first_page..$self->last_page] if $self->last_page <= $self->window;
 
-    # inspired from Data::Page::Navigation
     my @navigation = ($self->current_page);
     my $prev = $self->prev_page;
     my $next = $self->next_page;
