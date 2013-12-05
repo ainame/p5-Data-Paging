@@ -4,16 +4,18 @@ use common::sense;
 use parent 'Paging::Renderer::Base';
 
 sub render {
-    my $self = shift;
-    my $collection = $self->collection;
+    my ($self, $collection) = @_;
 
-    return {
-        entries      => $collection->entries,
-        has_perv     => $collection->has_prev,
-        prev_page    => $collection->next_page,
+    return +{
+        entries      => $collection->sliced_entries,
         has_next     => $collection->has_next,
+        has_prev     => $collection->has_prev,
         next_page    => $collection->next_page,
         current_page => $collection->current_page,
+        prev_page    => $collection->prev_page,
+        begin_count  => $collection->begin_count,
+        end_count    => $collection->end_count,
+        base_url     => $collection->base_url,
     };
 }
 
