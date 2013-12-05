@@ -1,38 +1,38 @@
 package Paging;
-use 5.008005;
-use strict;
-use warnings;
+use common::sense;
 
 our $VERSION = "0.01";
 
 use Class::Accessor::Lite (
     new => 0,
-    ro  => [qw/collection renderer/],
+    rw  => [qw/collection/],
 );
 use Carp qw/croak/;
 use Paging::Collection;
 
-sub new {
-    my $class = shift;
-    my $collection = Paging::Collection->new($_[0]);
-    my $self = bless { collection => $collection }, $class;
-    $self->renderer($self->_load_renderer($_[1]));
-    $self;
+sub create {
+    my ($class, $collection_param, $renderer_name) = @_;
+    my $collection = Paging::Collection->new(%$collection_param);
+    $collection->renderer($class->_create_renderer($renderer_name)) if $renderer_name;
+    $collection;
+}
+
+sub _create_renderer {
+    my ($class, $renderer_name) = @_;
+    my $package = $class->_load_renderer($renderer_name);
+    $package->new;
 }
 
 sub _load_renderer {
-    my ($self, $name) = @_;
-    my $renderer = $name ?
-        $name =~ s/-/Paging::Renderer::/
-        : 'Paging::Renderer::NeighborLink';
-    eval { require $renderer };
-    croak "can't load renderer" if $@;
-    $renderer->new($self->collection);
-}
+    my ($class, $name) = @_;
+    croak "done't set renderer" unless $name;
 
-sub render {
-    my $self = shift;
-    $self->renderer->render;
+    my $package = $name =~ s/-/Paging::Renderer::/r;
+    my $path = $package =~ s!::!/!rg;
+    eval { require "$path.pm" };  ## no critic
+    croak "can't load renderer: $path" if $@;
+
+    $package;
 }
 
 1;
@@ -61,6 +61,6 @@ it under the same terms as Perl itself.
 
 =head1 AUTHOR
 
-ainame E<lt>s.namai.2012@gmail.comE<gt>
+ainame E<lt>s.namai.09@gmail.comE<gt>
 
 =cut

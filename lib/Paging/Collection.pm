@@ -10,7 +10,8 @@ use Class::Accessor::Lite (
         current_page
         base_url
         window
-    /]
+    /],
+    rw  => [qw/renderer/],
 );
 
 use Carp qw/croak/;
@@ -18,6 +19,12 @@ use Carp qw/croak/;
 sub new {
     my ($class, %args) = @_;
     bless \%args, $class;
+}
+
+sub render {
+    my $self = shift;
+    croak "don't set renderer" unless $self->renderer;
+    $self->renderer->render($self);
 }
 
 sub sliced_entries {
