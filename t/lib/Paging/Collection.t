@@ -1,7 +1,6 @@
 use strict;
 use warnings;
 
-use t::helper;
 use Test::More;
 use Test::More::Hooks;
 use Test::Fatal;
