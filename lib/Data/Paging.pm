@@ -46,34 +46,34 @@ Data::Paging - pagination helper for view
 
 =head1 SYNOPSIS
 
-use Data::Paging;
-
-my $paging = Data::Paging->create({
-    entries      => $entries,
-    total_count  => 100,
-    per_page     => 30,
-    current_page => 1,
-});
-
-$paging->has_next;    #=> TRUE
-$paging->has_prev;    #=> FALSE
-$paging->prev_page;   #=> 0
-$paging->next_page;   #=> 2
-$paging->begin_count; #=> 30
-$paging->end_count;   #=> 30
-...
-
-# If you use simple template engine like HTML::Template,
-# you should use Data::Paging with renderer.
-my $paging = Data::Paging->create({
-    entries      => $entries,
-    total_count  => 100,
-    per_page     => 30,
-    current_page => 1,
-}, '-NeighborLink');  # NeighborLink is the bundled renderer. You can load renderer like Plack::Middleware.
-
-$paging->render #=> output HASHREF value
-
+    use Data::Paging;
+    
+    my $paging = Data::Paging->create({
+        entries      => $entries,
+        total_count  => 100,
+        per_page     => 30,
+        current_page => 1,
+    });
+    
+    $paging->has_next;    #=> TRUE
+    $paging->has_prev;    #=> FALSE
+    $paging->prev_page;   #=> 0
+    $paging->next_page;   #=> 2
+    $paging->begin_count; #=> 30
+    $paging->end_count;   #=> 30
+    ...
+    
+    # If you use simple template engine like HTML::Template,
+    # you should use Data::Paging with renderer.
+    my $paging = Data::Paging->create({
+        entries      => $entries,
+        total_count  => 100,
+        per_page     => 30,
+        current_page => 1,
+    }, '-NeighborLink');  # NeighborLink is the bundled renderer. You can load renderer like Plack::Middleware.
+    
+    $paging->render #=> output HASHREF value
+    
 =head1 DESCRIPTION
 
 `Data::Paging` is the helper library for implementation of paging.
