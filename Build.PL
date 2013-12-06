@@ -23,8 +23,8 @@ my %args = (
         'Module::Build' => 0.38,
     },
 
-    name            => 'Paging',
-    module_name     => 'Paging',
+    name            => 'Data::Paging',
+    module_name     => 'Data::Paging',
     allow_pureperl => 0,
 
     script_files => [glob('script/*'), glob('bin/*')],

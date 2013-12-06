@@ -6,7 +6,7 @@ use Test::More::Hooks;
 use Test::Fatal;
 
 BEGIN {
-    use_ok 'Paging::Collection';
+    use_ok 'Data::Paging::Collection';
 }
 
 subtest 'instantiate with total_count params' => sub {
@@ -17,7 +17,7 @@ subtest 'instantiate with total_count params' => sub {
 
     subtest 'when current_page is the first page' => sub {
         before {
-            $collection = Paging::Collection->new(
+            $collection = Data::Paging::Collection->new(
                 entries      => [qw/a b c d e f/],
                 total_count   => $total_count,
                 per_page     => 5,
@@ -55,7 +55,7 @@ subtest 'instantiate with total_count params' => sub {
 
     subtest 'when current_page is the last page' => sub {
         before {
-            $collection = Paging::Collection->new(
+            $collection = Data::Paging::Collection->new(
                 entries      => [qw/a b c d e/],
                 total_count   => $total_count,
                 per_page     => 5,
@@ -93,7 +93,7 @@ subtest 'instantiate with total_count params' => sub {
 
     subtest 'when with window params' => sub {
         subtest 'current_page =1 and window = 5' => sub {
-            $collection = Paging::Collection->new(
+            $collection = Data::Paging::Collection->new(
                 entries      => [qw/a b c d e/],
                 total_count  => 50,
                 per_page     => 5,
@@ -104,7 +104,7 @@ subtest 'instantiate with total_count params' => sub {
         };
 
         subtest 'current_page = 3 and window = 5' => sub {
-            $collection = Paging::Collection->new(
+            $collection = Data::Paging::Collection->new(
                 entries      => [qw/a b c d e/],
                 total_count  => 50,
                 per_page     => 5,
@@ -115,7 +115,7 @@ subtest 'instantiate with total_count params' => sub {
         };
 
         subtest 'current_page = 4 and window = 5' => sub {
-            $collection = Paging::Collection->new(
+            $collection = Data::Paging::Collection->new(
                 entries      => [qw/a b c d e/],
                 total_count  => 50,
                 per_page     => 5,
@@ -126,7 +126,7 @@ subtest 'instantiate with total_count params' => sub {
         };
 
         subtest 'current_page = 5 and window = 5' => sub {
-            $collection = Paging::Collection->new(
+            $collection = Data::Paging::Collection->new(
                 entries      => [qw/a b c d e/],
                 total_count  => 50,
                 per_page     => 5,
@@ -137,7 +137,7 @@ subtest 'instantiate with total_count params' => sub {
         };
 
         subtest 'current_page = 9 and window = 5' => sub {
-            $collection = Paging::Collection->new(
+            $collection = Data::Paging::Collection->new(
                 entries      => [qw/a b c d e/],
                 total_count  => 50,
                 per_page     => 5,
@@ -148,7 +148,7 @@ subtest 'instantiate with total_count params' => sub {
         };
 
         subtest 'current_page = 10 and window = 5' => sub {
-            $collection = Paging::Collection->new(
+            $collection = Data::Paging::Collection->new(
                 entries      => [qw/a b c d e/],
                 total_count  => 50,
                 per_page     => 5,
@@ -160,7 +160,7 @@ subtest 'instantiate with total_count params' => sub {
     };
     subtest 'when without window params' => sub {
         subtest 'navigation' => sub {
-            $collection = Paging::Collection->new(
+            $collection = Data::Paging::Collection->new(
                 entries      => [qw/a b c d e/],
                 total_count  => 50,
                 per_page     => 5,
@@ -176,7 +176,7 @@ subtest 'instantiate without total_count params' => sub {
 
     subtest 'when current_page is the first page' => sub {
         before {
-            $collection = Paging::Collection->new(
+            $collection = Data::Paging::Collection->new(
                 entries      => [qw/a b c d e/],
                 per_page     => 5,
                 current_page => 1,
@@ -211,7 +211,7 @@ subtest 'instantiate without total_count params' => sub {
 
     subtest 'when current_page is the last page' => sub {
         before {
-            $collection = Paging::Collection->new(
+            $collection = Data::Paging::Collection->new(
                 entries      => [qw/a b c d/],
                 per_page     => 5,
                 current_page => 2,
@@ -251,7 +251,7 @@ subtest 'instantiate without total_count params' => sub {
 
     subtest 'when current_page is the first page and padding row' => sub {
         before {
-            $collection = Paging::Collection->new(
+            $collection = Data::Paging::Collection->new(
                 entries      => [qw/a b c d e f/],
                 per_page     => 5,
                 current_page => 1,

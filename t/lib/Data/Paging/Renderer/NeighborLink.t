@@ -2,23 +2,23 @@ use strict;
 use warnings;
 
 use Test::More;
-use Paging::Collection;
+use Data::Paging::Collection;
 
 BEGIN {
-    use_ok "Paging::Renderer::NeighborLink";
+    use_ok "Data::Paging::Renderer::NeighborLink";
 }
 
 my $TRUE  = (1 == 1);
 my $FALSE = (1 == 2);
 
 subtest "new" => sub {
-    my $renderer = Paging::Renderer::NeighborLink->new;
-    isa_ok $renderer, 'Paging::Renderer::NeighborLink';
+    my $renderer = Data::Paging::Renderer::NeighborLink->new;
+    isa_ok $renderer, 'Data::Paging::Renderer::NeighborLink';
 };
 
 subtest "render" => sub {
-    my $renderer = Paging::Renderer::NeighborLink->new;
-    my $collection = Paging::Collection->new(
+    my $renderer = Data::Paging::Renderer::NeighborLink->new;
+    my $collection = Data::Paging::Collection->new(
         entries      => [qw/a b c d e/],
         per_page     => 5,
         total_count  => 10,

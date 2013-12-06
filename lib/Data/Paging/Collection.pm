@@ -1,4 +1,4 @@
-package Paging::Collection;
+package Data::Paging::Collection;
 use common::sense;
 
 use Class::Accessor::Lite (

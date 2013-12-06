@@ -1,4 +1,4 @@
-package Paging;
+package Data::Paging;
 use common::sense;
 
 our $VERSION = "0.01";
@@ -8,11 +8,11 @@ use Class::Accessor::Lite (
     rw  => [qw/collection/],
 );
 use Carp qw/croak/;
-use Paging::Collection;
+use Data::Paging::Collection;
 
 sub create {
     my ($class, $collection_param, $renderer_name) = @_;
-    my $collection = Paging::Collection->new(%$collection_param);
+    my $collection = Data::Paging::Collection->new(%$collection_param);
     $collection->renderer($class->_create_renderer($renderer_name)) if $renderer_name;
     $collection;
 }
@@ -27,7 +27,7 @@ sub _load_renderer {
     my ($class, $name) = @_;
     croak "done't set renderer" unless $name;
 
-    my $package = $name =~ s/-/Paging::Renderer::/r;
+    my $package = $name =~ s/-/Data::Paging::Renderer::/r;
     my $path = $package =~ s!::!/!rg;
     eval { require "$path.pm" };  ## no critic
     croak "can't load renderer: $path" if $@;
@@ -42,13 +42,13 @@ __END__
 
 =head1 NAME
 
-Paging - pagination helper for view
+Data::Paging - pagination helper for view
 
 =head1 SYNOPSIS
 
-use Paging;
+use Data::Paging;
 
-my $paging = Paging->create({
+my $paging = Data::Paging->create({
     entries      => $entries,
     total_count  => 100,
     per_page     => 30,
@@ -64,8 +64,8 @@ $paging->end_count;   #=> 30
 ...
 
 # If you use simple template engine like HTML::Template,
-# you should use Paging with renderer.
-my $paging = Paging->create({
+# you should use Data::Paging with renderer.
+my $paging = Data::Paging->create({
     entries      => $entries,
     total_count  => 100,
     per_page     => 30,
@@ -76,14 +76,14 @@ $paging->render #=> output HASHREF value
 
 =head1 DESCRIPTION
 
-`Paging` is the helper library for implementation of paging.
-Especialy, `Paging` class is the factory class of Paging::Collection.
+`Data::Paging` is the helper library for implementation of paging.
+Especialy, `Data::Paging` class is the factory class of Data::Paging::Collection.
 
-Paging::Collection is the accessor of many pagination parameters like `Data::Page`.
+Data::Paging::Collection is the accessor of many pagination parameters like `Data::Page`.
 `Data::Page` make us implement paging ui, but that ui only simple paging.
 
-`Paging` always has next or prev page number. This feature difference from Data::Page' one.
-And, if you create a Paging::Collection's instance with `window` parameter,
+`Data::Paging` always has next or prev page number. This feature difference from Data::Page' one.
+And, if you create a Data::Paging::Collection's instance with `window` parameter,
 you can use this like `Data::Page::Navigation`.
 
 =head1 LICENSE

@@ -1,4 +1,4 @@
-package Paging::Renderer::Base;
+package Data::Paging::Renderer::Base;
 use common::sense;
 
 use Class::Accessor::Lite (
