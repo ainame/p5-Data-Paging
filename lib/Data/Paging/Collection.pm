@@ -131,7 +131,19 @@ sub navigation {
         }
         $i += 1;
     }
-    \@navigation;
+    $self->{_navigation} = \@navigation;
+}
+
+sub begin_navigation_page {
+    my $self = shift;
+    my $navigation = $self->navigation;
+    shift @{$navigation};
+}
+
+sub end_navigation_page {
+    my $self = shift;
+    my $navigation = $self->navigation;
+    pop @{$navigation};
 }
 
 1;
