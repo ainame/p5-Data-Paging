@@ -73,18 +73,19 @@ Data::Paging - pagination helper for view
     }, '-NeighborLink');  # NeighborLink is the bundled renderer. You can load renderer like Plack::Middleware.
     
     $paging->render #=> output HASHREF value
-    
+
 =head1 DESCRIPTION
 
-`Data::Paging` is the helper library for implementation of paging.
-Especialy, `Data::Paging` class is the factory class of Data::Paging::Collection.
+Data::Paging = Data::Page + Data::Page::Navigation + Data::Page::NoTotalEntries
 
-Data::Paging::Collection is the accessor of many pagination parameters like `Data::Page`.
-`Data::Page` make us implement paging ui, but that ui only simple paging.
+Data::Paging is the helper library for implementation of paging.
+Especialy, Data::Paging class is the factory class of Data::Paging::Collection.
 
-`Data::Paging` always has next or prev page number. This feature difference from Data::Page' one.
-And, if you create a Data::Paging::Collection's instance with `window` parameter,
-you can use this like `Data::Page::Navigation`.
+Data::Paging::Collection is the accessor of many pagination parameters like Data::Page, and then, that contain other Data::Page's brother features.
+
+In addition, Data::Paging has renderer mechanism. That is convenience feature, when the application use rigid template engine like HTML::Template. Data::Paging bundle two default renderer to create common paging UI, also Data::Paging make application be able to define original renderer and load it as you like.
+
+A point to notice is Data::Paging always has next or prev page number. This feature difference from Data::Page' one. You should use has_next/has_prev method, when check whether next_page/prev_page exist or not.
 
 =head1 LICENSE
 
