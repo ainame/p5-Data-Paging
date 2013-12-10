@@ -1,5 +1,6 @@
 package Data::Paging;
 use common::sense;
+use 5.008008;
 use UNIVERSAL::require;
 
 our $VERSION = "0.01";
@@ -28,7 +29,8 @@ sub _load_renderer {
     my ($class, $name) = @_;
     croak "no renderer name" unless $name;
 
-    my $package = $name =~ s/\A-/Data::Paging::Renderer::/r;
+    my $package = $name;
+    $package =~ s/\A-/Data::Paging::Renderer::/;
     $package->require or croak "can't load renderer: $package";
     $package;
 }
