@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/ainame/p5-Data-Paging.png?branch=master)](https://travis-ci.org/ainame/p5-Data-Paging)
 # NAME
 
 Data::Paging - pagination helper for view
