@@ -15,6 +15,7 @@ use Class::Accessor::Lite (
 );
 
 use Carp qw/croak/;
+use POSIX qw/ceil/;
 
 sub new {
     my ($class, %args) = @_;
@@ -86,7 +87,7 @@ sub first_page {
 sub last_page {
     my $self = shift;
     croak "can't calc last_page without total_count" unless defined $self->total_count;
-    int($self->total_count / $self->per_page);
+    ceil($self->total_count / $self->per_page);
 }
 
 sub has_prev {

@@ -158,6 +158,7 @@ subtest 'instantiate with total_count params' => sub {
             is_deeply $collection->navigation, [6,7,8,9,10];
         };
     };
+
     subtest 'when without window params' => sub {
         subtest 'navigation' => sub {
             $collection = Data::Paging::Collection->new(
@@ -167,6 +168,18 @@ subtest 'instantiate with total_count params' => sub {
                 current_page => 10,
             );
             ok exception { $collection->navigation; };
+        };
+    };
+
+    subtest 'when total_count indivisible by per_page' => sub {
+        subtest 'last_page' => sub {
+            $collection = Data::Paging::Collection->new(
+                entries      => [qw/a b c d e/],
+                total_count  => 48,
+                per_page     => 5,
+                current_page => 10,
+            );
+            is $collection->last_page, 10;
         };
     };
 };
