@@ -23,7 +23,7 @@ my %args = (
         'Module::Build' => 0.38,
     },
 
-    name            => 'Data::Paging',
+    name            => 'Data-Paging',
     module_name     => 'Data::Paging',
     allow_pureperl => 0,
 
@@ -33,8 +33,7 @@ my %args = (
 
     test_files           => ((-d '.git' || $ENV{RELEASE_TESTING}) && -d 'xt') ? 't/ xt/' : 't/',
     recursive_test_files => 1,
-
-
+    
 );
 if (-d 'share') {
     $args{share_dir} = 'share';

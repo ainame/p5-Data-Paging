@@ -1,10 +1,10 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "pagination helper for view",
    "author" : [
       "@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.11.0, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Minilla/v0.8.1, CPAN::Meta::Converter version 2.132830",
    "license" : [
       "perl_5"
    ],
@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
-   "name" : "Data::Paging",
+   "name" : "Data-Paging",
    "no_index" : {
       "directory" : [
          "t",
@@ -43,15 +43,37 @@
       },
       "runtime" : {
          "requires" : {
-            "perl" : "5.008005"
+            "Class::Accessor::Lite" : "0",
+            "UNIVERSAL::require" : "0",
+            "common::sense" : "0",
+            "perl" : "5.008001"
          }
       },
       "test" : {
          "requires" : {
-            "Test::More" : "0.98"
+            "Find::Lib" : "0",
+            "Test::Fatal" : "0",
+            "Test::More" : "0.98",
+            "Test::More::Hooks" : "0",
+            "Test::Pretty" : "0"
          }
       }
    },
    "release_status" : "unstable",
-   "version" : "0.01"
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/ainame/p5-Data-Paging/issues"
+      },
+      "homepage" : "https://github.com/ainame/p5-Data-Paging",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/ainame/p5-Data-Paging.git",
+         "web" : "https://github.com/ainame/p5-Data-Paging"
+      }
+   },
+   "version" : "0.01",
+   "x_contributors" : [
+      "ainame <s.namai.2012@gmail.com>",
+      "satoshi.namai <satoshi.namai@mixi.co.jp>"
+   ]
 }
