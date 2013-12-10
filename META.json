@@ -46,7 +46,7 @@
             "Class::Accessor::Lite" : "0",
             "UNIVERSAL::require" : "0",
             "common::sense" : "0",
-            "perl" : "5.008001"
+            "perl" : "5.008008"
          }
       },
       "test" : {
